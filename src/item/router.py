@@ -1,0 +1,27 @@
+from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import Response
+from sqlalchemy import insert, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from database import get_async_session
+from item.models import Item
+from item.schemas import ItemCreate
+
+router = APIRouter(
+    prefix="/item",
+    tags=["Item"]
+)
+
+@router.post("",response_model=ItemCreate)
+async def add_item(new_item: ItemCreate, session: AsyncSession = Depends(get_async_session)):
+    try:
+        stmt = insert(Item).values(**new_item.model_dump())
+        await session.execute(stmt)
+        await session.commit()
+        return new_item
+    except Exception:
+        raise HTTPException(status_code=500, detail={
+            "status": "error",
+            "data": None,
+            "details": None,
+        })
