@@ -2,6 +2,7 @@ from datetime import datetime
 from database import Base
 from sqlalchemy import TIMESTAMP, Column, Integer, Float, String
 
+
 class Item(Base):
     __tablename__ = "item"
 
