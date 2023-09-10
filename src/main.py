@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from item.router import router as router_items
 from auth.schemas import UserCreate, UserRead
-from auth.model import User
+from auth.models import User
 from auth.user import auth_backend, current_active_user, fastapi_users
 
 

@@ -1,13 +1,20 @@
 from fastapi_users import schemas
+from datetime import datetime
 
 
 class UserRead(schemas.BaseUser[int]):
-    pass
+    role_id: int
+    username: str
+    registered_at: datetime
 
 
 class UserCreate(schemas.BaseUserCreate):
-    pass
+    role_id: int
+    username: str
+    registered_at: datetime
 
 
 class UserUpdate(schemas.BaseUserUpdate):
-    pass
+    role_id: int
+    username: str
+    registered_at: datetime

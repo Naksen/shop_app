@@ -9,7 +9,7 @@ from fastapi_users.authentication import (
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from fastapi_users.authentication import CookieTransport
 
-from auth.model import User
+from auth.models import User
 from auth.utils import get_user_db
 
 SECRET = "SECRET"
