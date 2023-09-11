@@ -11,8 +11,7 @@ from fastapi_users.authentication import CookieTransport
 
 from auth.models import User
 from auth.utils import get_user_db
-
-SECRET = "SECRET"
+from config import SECRET
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):

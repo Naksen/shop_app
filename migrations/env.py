@@ -7,7 +7,7 @@ from alembic import context
 import sys
 import os
 
-sys.path.append(os.path.join(sys.path[0], 'src'))
+sys.path.append(os.path.join(sys.path[0], "src"))
 
 from src.config import DB_HOST, DB_PORT, DB_USER, DB_NAME, DB_PASS
 from database import Base
@@ -81,9 +81,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

@@ -13,7 +13,9 @@ class Item(Base):
     cost: Mapped[int] = mapped_column(Integer, nullable=False)
     brand: Mapped[str] = mapped_column(String, nullable=False)
     size: Mapped[str] = mapped_column(String, nullable=False)
-    added_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, default=datetime.utcnow)
+    added_at: Mapped[Optional[datetime]] = mapped_column(
+        TIMESTAMP, default=datetime.utcnow
+    )
     description: Mapped[Optional[str]] = mapped_column(String)
     rating: Mapped[Optional[float]] = mapped_column(Float)
     amount: Mapped[int] = mapped_column(Integer)
