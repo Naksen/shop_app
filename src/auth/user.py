@@ -5,6 +5,7 @@ from fastapi_users import BaseUserManager, FastAPIUsers, IntegerIDMixin
 from fastapi_users.authentication import (
     AuthenticationBackend,
     JWTStrategy,
+    CookieTransport
 )
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from fastapi_users.authentication import CookieTransport
@@ -35,8 +36,6 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db)):
     yield UserManager(user_db)
 
-
-from fastapi_users.authentication import CookieTransport
 
 cookie_transport = CookieTransport(cookie_max_age=3600)
 
