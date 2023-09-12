@@ -16,7 +16,7 @@ async def add_item(
     try:
         return await ItemService.add(new_item, session)
     except Exception:
-        logging.info(f"Item {new_item} don't added")
+        logging.error(f"Item {new_item} wasn' added")
         raise HTTPException(
             status_code=500,
             detail={
@@ -32,12 +32,13 @@ async def get_item(item_id: int, session: AsyncSession = Depends(get_async_sessi
     try:
         return await ItemService.get(item_id, session)
     except Exception:
+        logging.error(f"Item {item_id} wasn't got")
         raise HTTPException(
             status_code=500,
             detail={
                 "status": "error",
                 "data": None,
-                "details": None,
+                "details": "Database conflict",
             },
         )
 
@@ -47,12 +48,13 @@ async def count_items(session: AsyncSession = Depends(get_async_session)):
     try:
         return await ItemService.count(session)
     except:
+        logging.error(f"Items weren't counted")
         raise HTTPException(
             status_code=500,
             detail={
                 "status": "error",
                 "data": None,
-                "details": "items not counted",
+                "details": "Database conflict",
             },
         )
 
@@ -62,11 +64,12 @@ async def delete_item(item_id: int, session: AsyncSession = Depends(get_async_se
     try:
         return await ItemService.delete(item_id, session)
     except:
+        logging.error(f"Item {item_id} wasn't deleted")
         raise HTTPException(
             status_code=500,
             detail={
                 "status": "error",
                 "data": None,
-                "details": "items not deleted",
+                "details": "Database conflict",
             },
         )

@@ -32,26 +32,3 @@ async def test_auth_login(ac: AsyncClient):
     }
     auth_response = await ac.post("/auth/login", headers=headers, data=data)
     assert auth_response.status_code == 204
-
-    # headers = {
-    #             'accept': 'application/json',
-    # }
-    # protected_cookies = auth_response.cookies
-    # print(protected_cookies)
-    # protected_response = await ac.get("/protected-route", headers=headers, cookies=protected_cookies)
-    # assert protected_response.status_code == 200
-    # assert protected_response.json() == "Hello, fakeuser@example.com"
-
-
-# async def test_get_access(ac: AsyncClient):
-#     headers = {
-#             'accept': 'application/json',
-#     }
-#     response = await ac.get("/protected-route", headers=headers)
-#     assert response.status_code == 200
-#     assert response.json() == "Hello, fakeuser@example.com"
-
-# async def test_auth_logout(ac: AsyncClient):
-#     response = await ac.post("/auth/logout")
-
-#     assert response.status_code == 204

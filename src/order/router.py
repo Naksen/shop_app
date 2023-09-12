@@ -27,7 +27,7 @@ async def add_order(
         )
         return await OrderService.add(new_order, session)
     except Exception:
-        logging.info(f"Order {new_order} wasn't added")
+        logging.error(f"Order {new_order} wasn't added")
         raise HTTPException(
             status_code=500,
             detail={
@@ -43,7 +43,7 @@ async def get_order(order_id: int, session: AsyncSession = Depends(get_async_ses
     try:
         return await OrderService.get(order_id, session)
     except Exception:
-        logging.info(f"Order {order_id} wasn't got")
+        logging.error(f"Order {order_id} wasn't got")
         raise HTTPException(
             status_code=500,
             detail={
