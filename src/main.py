@@ -1,11 +1,12 @@
 import logging
 from fastapi import FastAPI, Depends
 from item.router import router as router_items
+from order.router import router as router_order
 from auth.schemas import UserCreate, UserRead
 from auth.models import User
 from auth.user import auth_backend, current_active_user, fastapi_users
 
-logging.basicConfig(filename='app.log', level=logging.INFO)
+logging.basicConfig(filename="app.log", level=logging.INFO)
 
 
 app = FastAPI()
@@ -33,3 +34,4 @@ app.include_router(
     tags=["Auth"],
 )
 app.include_router(router_items)
+app.include_router(router_order)

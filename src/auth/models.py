@@ -1,8 +1,8 @@
-from typing import Literal, get_args, Optional
+from typing import Optional
 from datetime import datetime
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Integer, String, ForeignKey, TIMESTAMP, Enum
+from sqlalchemy import Integer, String, ForeignKey, TIMESTAMP
 
 from database import Base
 
@@ -20,23 +20,3 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     role_id: Mapped[int] = mapped_column(ForeignKey("role.id"))
     username: Mapped[str] = mapped_column(String, nullable=False)
     registered_at: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=False)
-
-
-OrderStatus = Literal["Pending", "Shipped", "Delivered", "Canceled", "Refunded"]
-
-
-class Order(Base):
-    __tablename__ = "order"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
-    item_id: Mapped[int] = mapped_column(ForeignKey("item.id"))
-    date_of_purchase: Mapped[datetime] = mapped_column(nullable=False)
-    status: Mapped[OrderStatus] = mapped_column(
-        Enum(
-            *get_args(OrderStatus),
-            name="orderstatus",
-            create_constraint=True,
-            validate_strings=True,
-        )
-    )

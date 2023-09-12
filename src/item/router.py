@@ -22,7 +22,7 @@ async def add_item(
             detail={
                 "status": "error",
                 "data": None,
-                "details": "item not added",
+                "details": "Database conflict",
             },
         )
 
@@ -39,7 +39,7 @@ async def get_item(item_id: int, session: AsyncSession = Depends(get_async_sessi
                 "data": None,
                 "details": None,
             },
-    )
+        )
 
 
 @router.get("/count")
