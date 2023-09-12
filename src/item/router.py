@@ -16,7 +16,7 @@ async def add_item(
     try:
         return await ItemService.add(new_item, session)
     except Exception:
-        logging.error(f"Item {new_item} wasn' added")
+        logging.error(f"Item {new_item} wasn't added")
         raise HTTPException(
             status_code=500,
             detail={

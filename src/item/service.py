@@ -31,3 +31,7 @@ class ItemService:
         await session.execute(stmt)
         await session.commit()
         return True
+    
+    @classmethod
+    async def update(cls, item_id: int, session: AsyncSession):
+        pass
