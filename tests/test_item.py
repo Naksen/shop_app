@@ -1,16 +1,13 @@
 from httpx import AsyncClient
 from fastapi import status
 
+
 async def test_item_get(ac: AsyncClient):
-    response = await ac.get(
-        url="/item/get",
-        params={
-            "item_id": 0
-        }
-    )   
+    response = await ac.get(url="/item/get", params={"item_id": 0})
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["name"] == "Air Force"
     assert response.json()["size"] == "42EU"
+
 
 async def test_item_add(ac: AsyncClient):
     response = await ac.post(
@@ -32,10 +29,12 @@ async def test_item_add(ac: AsyncClient):
     assert response.json()["name"] == "Air Force"
     assert response.json()["size"] == "42EU"
 
+
 async def test_item_count(ac: AsyncClient):
     response = await ac.get(url="item/count")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == 1
+
 
 async def test_item_delete(ac: AsyncClient):
     response = await ac.delete(

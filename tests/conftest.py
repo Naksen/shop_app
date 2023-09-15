@@ -8,9 +8,7 @@ from src.main import app
 import pytest
 
 
-
 class MockScalarResult:
-
     @staticmethod
     def first():
         return {
@@ -30,9 +28,10 @@ class MockScalarResult:
 class MockResult:
     def scalars(self):
         return MockScalarResult()
-    
+
     def scalar(self):
         return 1
+
 
 class MockAsyncSession:
     async def commit(self):
@@ -40,6 +39,7 @@ class MockAsyncSession:
 
     async def execute(self, statement):
         return MockResult()
+
 
 async def override_get_async_session():
     return MockAsyncSession()
@@ -52,7 +52,9 @@ def event_loop(request):
     yield loop
     loop.close()
 
+
 app.dependency_overrides[get_async_session] = override_get_async_session
+
 
 @pytest.fixture(scope="session")
 async def ac() -> AsyncGenerator[AsyncClient, None]:
