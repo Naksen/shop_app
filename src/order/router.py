@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_async_session
 from order.schemas import OrderCreate
 from order.service import OrderService
-from auth.models import User
-from auth.user import current_active_user
+from auth.schemas import UserInDB, User
+from auth.service import get_current_active_user
 
 router = APIRouter(prefix="/order", tags=["Order"])
 
@@ -15,7 +15,7 @@ router = APIRouter(prefix="/order", tags=["Order"])
 @router.post("/add", response_model=OrderCreate)
 async def add_order(
     item_id: int,
-    user: User = Depends(current_active_user),
+    user: User = Depends(get_current_active_user),
     session: AsyncSession = Depends(get_async_session),
 ):
     try:

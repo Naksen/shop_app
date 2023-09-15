@@ -1,20 +1,24 @@
-from fastapi_users import schemas
 from datetime import datetime
+from pydantic import BaseModel
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 
-class UserRead(schemas.BaseUser[int]):
-    role_id: int
+class TokenData(BaseModel):
+    username: str | None = None
+
+
+class User(BaseModel):
+    id: int
     username: str
+    email: str | None = None
+    full_name: str | None = None
     registered_at: datetime
-
-
-class UserCreate(schemas.BaseUserCreate):
+    is_active: bool | None = None
     role_id: int
-    username: str
-    registered_at: datetime
 
 
-class UserUpdate(schemas.BaseUserUpdate):
-    role_id: int
-    username: str
-    registered_at: datetime
+class UserInDB(User):
+    hashed_password: str
