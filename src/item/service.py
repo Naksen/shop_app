@@ -31,6 +31,13 @@ class ItemService:
         await session.execute(stmt)
         await session.commit()
         return True
+    
+    @classmethod
+    async def get_items(cls, session: AsyncSession, limit: int = 10, offset: int = 0):
+        query = select(Item).offset(offset).limit(limit)
+        result = await session.execute(query)
+        return result.scalars().all()
+
 
     @classmethod
     async def update(cls, item_id: int, session: AsyncSession):

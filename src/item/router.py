@@ -73,3 +73,8 @@ async def delete_item(item_id: int, session: AsyncSession = Depends(get_async_se
                 "details": "Database conflict",
             },
         )
+    
+
+@router.get("/get_page")
+async def get_page(session: AsyncSession = Depends(get_async_session)):
+    return await ItemService.get_items(session)

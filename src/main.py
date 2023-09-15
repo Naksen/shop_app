@@ -5,6 +5,7 @@ from item.router import router as router_items
 from order.router import router as router_order
 from pages.router import router as router_pages
 from auth.router import router as router_user
+from fastapi.staticfiles import StaticFiles
 
 
 logging.basicConfig(filename="app_log.log", level=logging.INFO)
@@ -12,6 +13,7 @@ logging.basicConfig(filename="app_log.log", level=logging.INFO)
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def root():
