@@ -1,5 +1,46 @@
 from httpx import AsyncClient
 from fastapi import status
+from src.main import app
+from database import get_async_session
+
+class MockScalarResult:
+    @staticmethod
+    def first():
+        return {
+            "id": 0,
+            "name": "Air Force",
+            "cost": 100,
+            "brand": "Nike",
+            "size": "42EU",
+            "added_at": "2023-09-11T15:13:06.440",
+            "description": "Best sneakers",
+            "rating": 9.8,
+            "amount": 4,
+            "type": "sneakers",
+        }
+
+
+class MockResult:
+    def scalars(self):
+        return MockScalarResult()
+
+    def scalar(self):
+        return 1
+
+
+class MockAsyncSession:
+    async def commit(self):
+        pass
+
+    async def execute(self, statement):
+        return MockResult()
+
+
+async def override_get_async_session():
+    return MockAsyncSession()
+
+
+app.dependency_overrides[get_async_session] = override_get_async_session
 
 
 async def test_item_get(ac: AsyncClient):
@@ -45,3 +86,4 @@ async def test_item_delete(ac: AsyncClient):
     )
     assert response.status_code == status.HTTP_200_OK
     assert response
+

@@ -9,11 +9,12 @@ import os
 
 sys.path.append(os.path.join(sys.path[0], "src"))
 
-from src.config import settings
-from database import Base
-from src.item.models import *
-from src.auth.models import *
-from src.order.models import *
+from src.core.config import settings
+from db.db import Base
+from src.models.item_model import *
+from src.models.order_model import *
+from src.models.user_model import *
+from src.models.role_model import *
 
 
 # this is the Alembic Config object, which provides
@@ -21,11 +22,11 @@ from src.order.models import *
 config = context.config
 
 section = config.config_ini_section
-config.set_section_option(section, "DB_HOST", settings.DB_HOST)
-config.set_section_option(section, "DB_PORT", settings.DB_PORT)
-config.set_section_option(section, "DB_USER", settings.DB_USER)
-config.set_section_option(section, "DB_NAME", settings.DB_NAME)
-config.set_section_option(section, "DB_PASS", settings.DB_PASS)
+config.set_section_option(section, "POSTGRES_HOST", settings.POSTGRES_HOST)
+config.set_section_option(section, "POSTGRES_PORT", settings.POSTGRES_PORT)
+config.set_section_option(section, "POSTGRES_USER", settings.POSTGRES_USER)
+config.set_section_option(section, "POSTGRES_NAME", settings.POSTGRES_NAME)
+config.set_section_option(section, "POSTGRES_PASSWORD", settings.POSTGRES_PASSWORD)
 
 
 # Interpret the config file for Python logging.
