@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from api.dependencies import get_current_active_user, order_service
 from schemas.order_schema import OrderCreateSchema, OrderDBSchema, OrderUserSchema
@@ -49,9 +49,9 @@ async def get_my_orders(
 
 @router.put("/update_order", response_model=OrderDBSchema)
 async def update_order(
-    order_id: int,
     order_new: OrderCreateSchema,
     order_service: Annotated[OrderService, Depends(order_service)],
+    order_id: int = Query(ge=0),
 ):
     order_db = OrderDBSchema(
         id=order_id,
@@ -63,8 +63,8 @@ async def update_order(
 
 @router.delete("/delete_order", response_model=OrderDBSchema)
 async def delete_order(
-    order_id: int,
     order_service: Annotated[OrderService, Depends(order_service)],
+    order_id: int = Query(ge=0),
 ):
     order = await order_service.delete_order(order_id)
     return order
