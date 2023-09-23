@@ -22,11 +22,11 @@ from src.models.role_model import *
 config = context.config
 
 section = config.config_ini_section
-config.set_section_option(section, "POSTGRES_HOST", settings.POSTGRES_HOST)
-config.set_section_option(section, "POSTGRES_PORT", settings.POSTGRES_PORT)
-config.set_section_option(section, "POSTGRES_USER", settings.POSTGRES_USER)
-config.set_section_option(section, "POSTGRES_NAME", settings.POSTGRES_NAME)
-config.set_section_option(section, "POSTGRES_PASSWORD", settings.POSTGRES_PASSWORD)
+config.set_section_option(section, "POSTGRES_HOST", str(settings.POSTGRES_HOST))
+config.set_section_option(section, "POSTGRES_PORT", str(settings.POSTGRES_PORT))
+config.set_section_option(section, "POSTGRES_USER", str(settings.POSTGRES_USER))
+config.set_section_option(section, "POSTGRES_DB", str(settings.POSTGRES_DB))
+config.set_section_option(section, "POSTGRES_PASSWORD", str(settings.POSTGRES_PASSWORD))
 
 
 # Interpret the config file for Python logging.

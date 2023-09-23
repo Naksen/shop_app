@@ -16,7 +16,7 @@ class Order(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     item_id: Mapped[int] = mapped_column(ForeignKey("item.id"))
     date_of_purchase: Mapped[datetime] = mapped_column(nullable=False)
-    status: Mapped[OrderStatus] = mapped_column(
+    status: Mapped[Enum] = mapped_column(
         Enum(
             *get_args(OrderStatus),
             name="orderstatus",
