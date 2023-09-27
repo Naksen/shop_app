@@ -16,7 +16,8 @@ def event_loop(request):
     loop.close()
 
 
-#app.dependency_overrides[get_async_session] = override_get_async_session
+# app.dependency_overrides[get_async_session] = override_get_async_session
+
 
 @pytest.fixture(scope="session")
 async def ac() -> AsyncGenerator[AsyncClient, None]:

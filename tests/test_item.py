@@ -3,6 +3,7 @@ from fastapi import status
 from src.main import app
 from database import get_async_session
 
+
 class MockScalarResult:
     @staticmethod
     def first():
@@ -86,4 +87,3 @@ async def test_item_delete(ac: AsyncClient):
     )
     assert response.status_code == status.HTTP_200_OK
     assert response
-

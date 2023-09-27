@@ -1,8 +1,10 @@
-.env
+.env.dev
 .vscode/
 .venv/
 .pytest_cache/
 .ruff_cache/
+tests/
+data
 app.log
 test.py
 __pycache__/
